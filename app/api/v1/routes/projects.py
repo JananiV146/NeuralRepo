@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_db_session
@@ -16,7 +17,13 @@ async def create_project(
     session: AsyncSession = Depends(get_db_session),
 ) -> ProjectRead:
     service = ProjectService(session)
-    project = await service.create_project(payload)
+    try:
+        project = await service.create_project(payload)
+    except (SQLAlchemyError, OSError) as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database is unavailable.",
+        ) from exc
     return ProjectRead.model_validate(project)
 
 
@@ -26,7 +33,13 @@ async def get_project(
     session: AsyncSession = Depends(get_db_session),
 ) -> ProjectRead:
     service = ProjectService(session)
-    project = await service.get_project(project_id)
+    try:
+        project = await service.get_project(project_id)
+    except (SQLAlchemyError, OSError) as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database is unavailable.",
+        ) from exc
     if project is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

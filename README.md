@@ -16,6 +16,16 @@ This module sets up:
 - Docker and Docker Compose for local development
 - Baseline automated tests
 
+## Module 2 Scope
+
+This module adds:
+
+- Repository ingestion from GitHub clone URLs
+- Repository ingestion from uploaded `.zip`, `.tar`, `.tar.gz`, and `.tgz` archives
+- Persistent repository metadata and ingestion status tracking
+- Workspace storage layout under `data/repositories`
+- Repository listing and detail endpoints under each project
+
 ## Quick Start
 
 ### 1. Copy environment variables
@@ -56,4 +66,3 @@ uvicorn app.main:app --reload
 ```powershell
 pytest
 ```
-

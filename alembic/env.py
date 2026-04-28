@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from app.core.config import get_settings
 from app.db.base import Base
 from app.models import project  # noqa: F401
+from app.models import repository  # noqa: F401
 
 config = context.config
 settings = get_settings()
@@ -60,4 +61,3 @@ else:
     import asyncio
 
     asyncio.run(run_migrations_online())
-

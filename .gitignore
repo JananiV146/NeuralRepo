@@ -8,8 +8,9 @@ __pycache__/
 htmlcov/
 .env
 .env.local
+data/
 dist/
 build/
+*.egg-info/
 .DS_Store
 alembic/versions/__pycache__/
-

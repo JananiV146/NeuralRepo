@@ -18,7 +18,7 @@ async def health_check() -> HealthResponse:
 async def readiness_check(session: AsyncSession = Depends(get_db_session)) -> ReadinessResponse:
     try:
         await session.execute(text("SELECT 1"))
-    except SQLAlchemyError as exc:
+    except (SQLAlchemyError, OSError) as exc:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Database is unavailable.",

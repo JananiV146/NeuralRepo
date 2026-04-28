@@ -1,4 +1,5 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -23,13 +24,18 @@ class Settings(BaseSettings):
     database_url: str = (
         "postgresql+asyncpg://postgres:postgres@localhost:5432/codebase_intelligence"
     )
+    storage_root: Path = Path("./data")
+    max_upload_size_mb: int = 250
 
     @property
     def is_production(self) -> bool:
         return self.app_env.lower() == "production"
 
+    @property
+    def repositories_root(self) -> Path:
+        return self.storage_root / "repositories"
+
 
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-
