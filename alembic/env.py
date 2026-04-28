@@ -11,6 +11,10 @@ from app.core.config import get_settings
 from app.db.base import Base
 from app.models import project  # noqa: F401
 from app.models import repository  # noqa: F401
+from app.models import repository_dependency  # noqa: F401
+from app.models import repository_file  # noqa: F401
+from app.models import repository_import  # noqa: F401
+from app.models import repository_symbol  # noqa: F401
 
 config = context.config
 settings = get_settings()
