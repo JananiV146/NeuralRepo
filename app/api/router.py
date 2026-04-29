@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 
 from app.api.v1.routes.chunks import router as chunks_router
+from app.api.v1.routes.embeddings import router as embeddings_router
 from app.api.v1.routes.health import router as health_router
 from app.api.v1.routes.projects import router as projects_router
 from app.api.v1.routes.repository_ast import router as repository_ast_router
@@ -16,3 +17,4 @@ api_router.include_router(repository_files_router, tags=["repository-files"])
 api_router.include_router(repository_ast_router, tags=["repository-ast"])
 api_router.include_router(repository_graph_router, tags=["repository-graph"])
 api_router.include_router(chunks_router, tags=["code-chunks"])
+api_router.include_router(embeddings_router, tags=["embeddings"])
