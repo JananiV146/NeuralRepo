@@ -170,7 +170,7 @@ class SemanticChunkingStrategy(BaseChunkingStrategy):
                 chunk_type=symbol_type,
                 primary_symbol_id=UUID(symbol.get("id")) if symbol.get("id") else None,
                 language=language,
-                metadata=self._extract_metadata(chunk_content, symbol),
+                chunk_metadata=self._extract_metadata(chunk_content, symbol),
             )
 
             chunks.append(chunk)
@@ -210,7 +210,7 @@ class SemanticChunkingStrategy(BaseChunkingStrategy):
                             chunking_strategy=ChunkingStrategy.SEMANTIC.value,
                             chunk_type=ChunkType.PARAGRAPH.value,
                             language=language,
-                            metadata=self._extract_metadata(block_content),
+                            chunk_metadata=self._extract_metadata(block_content),
                         )
 
                         chunks.append(chunk)
@@ -272,7 +272,7 @@ class FixedSizeChunkingStrategy(BaseChunkingStrategy):
                 chunking_strategy=ChunkingStrategy.FIXED_SIZE.value,
                 chunk_type=ChunkType.BLOCK.value,
                 language=language,
-                metadata=self._extract_metadata(chunk_content),
+                chunk_metadata=self._extract_metadata(chunk_content),
             )
 
             chunks.append(chunk)
@@ -342,7 +342,7 @@ class SlidingWindowChunkingStrategy(BaseChunkingStrategy):
                         language=language,
                         is_overlapped=True,
                         overlap_source_chunk_ids=[base_chunks[i].id, base_chunks[i + 1].id],
-                        metadata=self._extract_metadata(overlap_content),
+                        chunk_metadata=self._extract_metadata(overlap_content),
                     )
 
                     chunks.append(chunk)

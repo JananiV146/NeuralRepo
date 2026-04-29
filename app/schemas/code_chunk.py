@@ -29,7 +29,7 @@ class CodeChunkRead(BaseModel):
     embedding_model: str | None
     is_overlapped: bool
     overlap_source_chunk_ids: list[UUID] | None
-    metadata: dict | None
+    chunk_metadata: dict | None
     created_at: datetime
     updated_at: datetime
 
@@ -55,7 +55,7 @@ class CodeChunkCreateRequest(BaseModel):
     language: str = "python"
     is_overlapped: bool = False
     overlap_source_chunk_ids: list[UUID] | None = None
-    metadata: dict | None = None
+    chunk_metadata: dict | None = None
 
 
 class RepositoryChunkingResponse(BaseModel):

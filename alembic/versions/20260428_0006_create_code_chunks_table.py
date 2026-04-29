@@ -41,7 +41,7 @@ def upgrade() -> None:
         sa.Column("embedding_model", sa.String(100), nullable=True),
         sa.Column("is_overlapped", sa.Boolean(), nullable=False, server_default=sa.false()),
         sa.Column("overlap_source_chunk_ids", sa.JSON(), nullable=True),
-        sa.Column("metadata", sa.JSON(), nullable=True),
+        sa.Column("chunk_metadata", sa.JSON(), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
         sa.Column("updated_at", sa.DateTime(timezone=True), nullable=False, server_default=sa.text("now()")),
         sa.ForeignKeyConstraint(["repository_id"], ["repositories.id"], ondelete="CASCADE"),

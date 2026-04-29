@@ -115,12 +115,26 @@ class TestSemanticChunking:
 
         repository_id = uuid4()
         file_id = uuid4()
+        symbol_id = uuid4()
+
+        # Provide symbols for semantic chunking
+        symbols = [
+            {
+                "id": str(symbol_id),
+                "name": "hello_world",
+                "symbol_type": "function",
+                "line_start": 3,
+                "line_end": 5,
+                "qualified_name": "hello_world",
+            },
+        ]
 
         chunks = strategy.chunk(
             content=SAMPLE_PYTHON_CODE,
             file_id=file_id,
             repository_id=repository_id,
             language="python",
+            symbols=symbols,
         )
 
         for chunk in chunks:
@@ -132,7 +146,7 @@ class TestSemanticChunking:
             assert chunk.token_count > 0
             assert chunk.character_count > 0
             assert chunk.chunking_strategy == ChunkingStrategy.SEMANTIC.value
-            assert chunk.metadata is not None
+            assert chunk.chunk_metadata is not None
 
 
 class TestFixedSizeChunking:

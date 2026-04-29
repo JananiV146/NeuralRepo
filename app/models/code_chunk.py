@@ -60,7 +60,7 @@ class CodeChunk(Base):
     overlap_source_chunk_ids: Mapped[list[uuid.UUID] | None] = mapped_column(JSON(), nullable=True)
 
     # Additional metadata (complexity, imports, etc.)
-    metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON(), nullable=True)
+    chunk_metadata: Mapped[dict[str, Any] | None] = mapped_column(JSON(), nullable=True)
 
     # Timestamps
     created_at: Mapped[datetime] = mapped_column(server_default=func.now(), nullable=False)
