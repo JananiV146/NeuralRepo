@@ -31,6 +31,11 @@ class QdrantVectorDB:
             url: Qdrant server URL (default from QDRANT_URL env var or localhost)
             api_key: API key for authentication (optional)
         """
+        if not HAS_QDRANT:
+            raise ImportError(
+                "qdrant-client not installed. Install with: pip install qdrant-client"
+            )
+        
         self.url = url or os.getenv("QDRANT_URL", "http://localhost:6333")
         self.api_key = api_key or os.getenv("QDRANT_API_KEY")
         self.client = AsyncQdrantClient(url=self.url, api_key=self.api_key)
